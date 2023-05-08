@@ -1,0 +1,32 @@
+
+
+<div class="mt-4 px-4">
+    <h3>EDITING A BLOG </h3>
+
+    <form class="mt-4" method="POST" action="/courses/{{course._id}}?_method=PUT">
+        <div class="form-floating mb-4">
+            <input value="{{course.name}}" type="text" name="name" id="name" class="form-control" />
+            <label class="form-label" for="name">Name</label>
+        </div>
+        <div class="form-floating mb-4">
+            <textarea name="description" class="form-control" id="description">{{course.description}} </textarea>
+            <label class="form-label" for="description">Desc</label>
+        </div>
+
+        <div class="form-floating mb-4">
+            <input value="{{course.videoId}}" type="text" name="videoId" class="form-control" id="videoId">
+            <label class="form-label" for="videoId">Video ID</label>
+        </div>
+
+        <div class="form-floating mb-4">
+            <input value="{{course.content}}" type="text" name="content" class="form-control" id="content">
+            <label class="form-label" for="content">Content</label>
+        </div>
+        <div class="">
+            {{!-- <button class='btn btn-primary mt-4'>Cancel</button> --}}
+            <button type="submit" class='btn btn-primary mt-4'>Save</button>
+        </div>
+    </form>
+
+
+</div>
