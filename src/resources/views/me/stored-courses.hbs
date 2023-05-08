@@ -1,0 +1,99 @@
+<div class="mt-4">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Blog Name</th>
+                <th scope="col">Content</th>
+                <th scope="col">Date created</th>
+                <th scope="col" colspan="2"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each courses}}
+            <tr>
+                <th scope="row">{{sum @index 1}}</th>
+                <td>{{this.name}}</td>
+                <td>{{this.content}}</td>
+                <td>{{this.createdAt}}</td>
+                <td>
+                    <a href="/courses/{{this._id}}/edit" class="btn btn-primary">Edit</a>
+                </td>
+                <td>
+                    <!-- Button trigger modal -->
+                    <button type="button" data-bs-id="{{this._id}}" class="btn btn-dark" data-bs-toggle="modal"
+                        data-bs-target="#delete-blog">
+                        Delete
+                    </button>
+                </td>
+            </tr>
+
+            {{/each}}
+
+
+        </tbody>
+    </table>
+</div>
+
+
+{{!-- Confirm delete blog --}}
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="delete-blog" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Do you really want to delete?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Data will be delete when you click "Yes" in this form
+            </div>
+            <div class="modal-footer">
+                <button id="btn-delete-blog" type="button" class="btn btn-danger">Yes</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{{!-- Form Delete - Hidden --}}
+
+
+
+<div class="mt-4 px-4">
+    <form name="delete-form-blog" method="POST" action="">
+    </form>
+</div>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        var blogId;
+        var deleteForm = document.forms["delete-form-blog"]
+        var btnDeleteBlog = document.getElementById("btn-delete-blog")
+
+
+        var deleteBlogModal = document.getElementById('delete-blog')
+        deleteBlogModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget
+            blogId = button.getAttribute('data-bs-id')
+            console.log(blogId)
+
+        })
+
+        btnDeleteBlog.onclick = () => {
+            deleteForm.action = "/courses/" + blogId + "?_method=DELETE";
+            deleteForm.submit(  )
+        }
+
+
+    })
+
+</script>
